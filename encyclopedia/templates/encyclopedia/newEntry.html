@@ -1,0 +1,25 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+New Page
+{% endblock %}
+
+{% block body %}
+
+{% if edit %}
+<h1>Editing {{title}} now!</h1>
+{% else %}
+<h1>Create your new page</h1>
+{% endif %}
+
+{% if exists %}
+<h1>Sorry, <a href="{% url 'entry' entry %}">{{entry}}</a> already exists!</h1>
+{% endif %}
+<form action="{% url 'new' %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}
